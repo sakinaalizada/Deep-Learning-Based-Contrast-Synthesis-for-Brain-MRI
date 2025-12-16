@@ -11,18 +11,15 @@ import numpy as np
 from utils.model_utils import modelObj
 
 
-# 👉 UPDATE THIS to your new HDF5 file
 hdf5_path = '/gpfs/data/fenglab/ParisimaAbdali/pa2297/Training/t1-t2-flair/Datah5/Zmean350-synth/train_t1-t2-flair_pretrain_img_zmean.hdf5'
 
 
 print("\n=== HDF5 SANITY CHECK ===\n")
 
 with h5py.File(hdf5_path, "r") as f:
-    # List all datasets
     keys = list(f.keys())
     print("Datasets found:", keys)
 
-    # Use the first dataset
     dname = keys[0]
     dset = f[dname]
 
@@ -30,7 +27,6 @@ with h5py.File(hdf5_path, "r") as f:
     print("Shape:", dset.shape)
     print("Dtype:", dset.dtype)
 
-    # Extract one sample
     sample = dset[0]
     print("\nOne sample shape:", sample.shape)
 
@@ -39,10 +35,8 @@ with h5py.File(hdf5_path, "r") as f:
     print("  max:", np.max(sample))
     print("  mean:", np.mean(sample))
 
-    # Check for NaNs
     print("\nContains NaN?", np.isnan(sample).any())
 
-    # Channel count
     if sample.ndim == 3:
         print("Number of channels:", sample.shape[-1])
     else:
